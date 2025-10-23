@@ -7,6 +7,7 @@ import EducationSection from "./components/EducationSection";
 import CertificationsSection from "./components/Certifications";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
+import BackToTop from "./components/BackToTop";
 
 export default function HomePage() {
   return (
@@ -19,7 +20,8 @@ export default function HomePage() {
       <EducationSection id="education" />
       <CertificationsSection id="certifications" />
       <ProjectsSection id="projects" />
-      <ContactSection />
+      <ContactSection id="contact" />
+      <BackToTop />
     </main>
   );
 }

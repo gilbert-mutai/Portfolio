@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FaDocker, FaGitAlt, FaPython, FaDatabase, FaWindows, FaFileExcel } from "react-icons/fa";
+import { FaDocker, FaGitAlt, FaPython, FaDatabase, FaWindows,FaNetworkWired, FaFileExcel } from "react-icons/fa";
 import { SiKubernetes, SiTerraform, SiAnsible, SiAkiflow, SiSap, SiElasticsearch, SiGrafana, SiPrometheus, SiArgo } from "react-icons/si";
 
 type ExperienceProps = {
@@ -71,11 +71,11 @@ export default function Experience({ id }: ExperienceProps) {
       duration: "Nov 2021 – Nov 2022",
       description:
         "Administered Windows and Linux environments, managed user accounts, Active Directory, firewall and network tools, ensuring seamless IT operations and high system availability.",
-      tools: [
-        { name: "Windows Server", icon: FaWindows, color: "text-blue-400" },
-        { name: "Active Directory", icon: FaWindows, color: "text-green-400" },
-        { name: "Firewalls & Network", icon: FaDocker, color: "text-purple-400" },
-      ],
+    tools: [
+      { name: "Windows Server", icon: FaWindows, color: "text-blue-400" },
+      { name: "Active Directory", icon: FaWindows, color: "text-green-400" },
+      { name: "Firewalls & Network", icon: FaNetworkWired, color: "text-purple-400" },
+    ],
     },
   ];
 
@@ -83,7 +83,7 @@ export default function Experience({ id }: ExperienceProps) {
     <section id={id} className="bg-gray-950 text-white py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-12 text-green-400">
-          Professional Experience
+          Experience
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -91,9 +91,10 @@ export default function Experience({ id }: ExperienceProps) {
             <div
               key={index}
               className="bg-gray-900 p-6 rounded-xl shadow-md border border-gray-800
-                         hover:border-green-500 hover:shadow-2xl transform hover:-translate-y-2
-                         transition-all duration-300 flex flex-col items-center text-center"
-            >
+                hover:border-green-500 hover:shadow-2xl transform hover:-translate-y-2
+                transition-all duration-300 flex flex-col items-center text-center
+                min-h-[380px]"
+                >
               {/* Company Logo */}
               <div className="mb-4">
                 <Image
@@ -113,20 +114,23 @@ export default function Experience({ id }: ExperienceProps) {
               <p className="text-gray-300 mb-4">{exp.description}</p>
 
               {/* Tools / Tech Badges */}
-              <div className="flex flex-wrap justify-center gap-2">
-                {exp.tools.map((tool, i) => {
-                  const Icon = tool.icon;
-                  return (
-                    <span
-                      key={i}
-                      className={`flex items-center gap-1 bg-green-600/20 px-3 py-1 rounded-full text-sm font-medium ${tool.color}`}
-                    >
-                      <Icon size={18} />
-                      {tool.name}
-                    </span>
-                  );
-                })}
-              </div>
+            {/* Tools / Tech Badges */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {exp.tools.map((tool, i) => {
+              const Icon = tool.icon;
+              return (
+                <span
+                  key={i}
+                  className={`flex items-center gap-1 bg-green-600/20 px-3 py-1 rounded-full text-sm font-medium ${tool.color} 
+                            hover:scale-105 hover:bg-green-600/30 transition-all duration-200`}
+                >
+                  <Icon size={18} />
+                  {tool.name}
+                </span>
+              );
+            })}
+          </div>
+
             </div>
           ))}
         </div>

@@ -43,7 +43,7 @@ const educationList: EducationEntry[] = [
     details: [
       "Core technologies: Linux, Python, JavaScript, Databases, Version Control (Git)",
     ],
-    logo: "/logos/moringa.png",
+    logo: "/logos/moringa-2.png",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function EducationSection({ id }: EducationSectionProps) {
   return (
     <section id={id} className="bg-gray-950 text-white py-16 px-6">
       <h2 className="text-4xl font-bold text-center mb-12 text-green-400">
-        Education & Professional Development
+        Education
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">

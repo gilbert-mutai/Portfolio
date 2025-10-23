@@ -59,7 +59,7 @@ export default function CertificationsSection({ id }: CertificationsSectionProps
   return (
     <section id={id} className="bg-gray-950 text-white py-16 px-6">
       <h2 className="text-4xl font-bold text-center mb-12 text-green-400">
-        Certifications & Skills
+        Certifications
       </h2>
 
       {/* Certifications */}
