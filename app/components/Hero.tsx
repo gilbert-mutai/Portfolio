@@ -1,19 +1,14 @@
 "use client";
 
-import React from "react";
-import { Mail, CalendarDays, Github, Linkedin } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Mail, CalendarDays, Github, Linkedin, X } from "lucide-react";
+import { InlineWidget } from "react-calendly";
 
-/**
- * Hero Section
- * Left: Typewriter titles (from your original)
- * Right: Continuous terminal simulation (Kubernetes/DevOps commands)
- * Background: Floating stars
- */
+/** Hero Section with Book a Call Modal + Real Calendly Embed */
 export default function Hero(): React.ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  /** ------------------ TYPEWRITER (LEFT SIDE) ------------------ **/
+  /** ------------------ TYPEWRITER ------------------ **/
   const titles = [
     "Cloud & DevOps Engineer",
     "Automation Engineer",
@@ -29,9 +24,15 @@ export default function Hero(): React.ReactElement {
     let timeout: NodeJS.Timeout;
 
     if (!deleting && displayText.length < current.length) {
-      timeout = setTimeout(() => setDisplayText(current.slice(0, displayText.length + 1)), 100);
+      timeout = setTimeout(
+        () => setDisplayText(current.slice(0, displayText.length + 1)),
+        100
+      );
     } else if (deleting && displayText.length > 0) {
-      timeout = setTimeout(() => setDisplayText(current.slice(0, displayText.length - 1)), 50);
+      timeout = setTimeout(
+        () => setDisplayText(current.slice(0, displayText.length - 1)),
+        50
+      );
     } else if (!deleting && displayText.length === current.length) {
       timeout = setTimeout(() => setDeleting(true), 1500);
     } else if (deleting && displayText.length === 0) {
@@ -42,60 +43,18 @@ export default function Hero(): React.ReactElement {
     return () => clearTimeout(timeout);
   }, [displayText, deleting, titleIndex]);
 
-  /** ------------------ TERMINAL SIMULATION (RIGHT SIDE) ------------------ **/
+  /** ------------------ TERMINAL SIMULATION ------------------ **/
   const [terminalLines, setTerminalLines] = useState<string[]>([]);
   const [typingText, setTypingText] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const terminalRef = useRef<HTMLDivElement | null>(null);
 
-  const commands: { cmd: string; output?: string[]; pauseAfterMs?: number }[] = [
-    {
-      cmd: "kubectl get pods --all-namespaces",
-      output: [
-        "NAMESPACE     NAME                             READY   STATUS    RESTARTS   AGE",
-        "default       web-frontend-56f7ccfc9d         1/1     Running   0          3m",
-        "default       api-service-6d89b64b74          1/1     Running   0          3m",
-        "kube-system   coredns-558bd4d5db-7k9q2        1/1     Running   0          10m",
-      ],
-      pauseAfterMs: 1400,
-    },
-    {
-      cmd: "kubectl describe deployment web-frontend",
-      output: [
-        "Name:                   web-frontend",
-        "Namespace:              default",
-        "Replicas:               3 desired | 3 updated | 3 total",
-        "StrategyType:           RollingUpdate",
-        "Conditions:             Available True  (5s ago)",
-      ],
-      pauseAfterMs: 1200,
-    },
-    {
-      cmd: "terraform apply -auto-approve",
-      output: [
-        "aws_eks_cluster.cluster: Creating...",
-        "aws_eks_cluster.cluster: Creation complete after 12s",
-        "Apply complete! Resources: 5 added, 0 changed, 0 destroyed.",
-      ],
-      pauseAfterMs: 1500,
-    },
-    {
-      cmd: "ansible-playbook site.yml --limit webservers",
-      output: [
-        "PLAY [Deploy Web App] *****************************************************",
-        "TASK [Gathering Facts] ****************************************************",
-        "ok: [web1]",
-        "ok: [web2]",
-        "PLAY RECAP ****************************************************************",
-        "web1                       : ok=12   changed=3    unreachable=0    failed=0",
-      ],
-      pauseAfterMs: 1500,
-    },
-    {
-      cmd: "aws eks update-kubeconfig --name prod-cluster",
-      output: ["Updated context arn:aws:eks:us-east-1:123456789012:cluster/prod-cluster"],
-      pauseAfterMs: 1200,
-    },
+  const commands = [
+    { cmd: "kubectl get pods --all-namespaces", output: ["..."], pauseAfterMs: 1400 },
+    { cmd: "kubectl describe deployment web-frontend", output: ["..."], pauseAfterMs: 1200 },
+    { cmd: "terraform apply -auto-approve", output: ["..."], pauseAfterMs: 1500 },
+    { cmd: "ansible-playbook site.yml --limit webservers", output: ["..."], pauseAfterMs: 1500 },
+    { cmd: "aws eks update-kubeconfig --name prod-cluster", output: ["..."], pauseAfterMs: 1200 },
   ];
 
   const typingSpeed = 28;
@@ -120,26 +79,31 @@ export default function Hero(): React.ReactElement {
       let cmdIndex = 0;
       while (!isCancelled) {
         const { cmd, output = [], pauseAfterMs = 1000 } = commands[cmdIndex];
-
         setIsTyping(true);
         setTypingText("");
+
         for (let i = 0; i <= cmd.length; i++) {
           if (isCancelled) return;
-          await new Promise<void>((res) => schedule(() => {
-            setTypingText("$ " + cmd.slice(0, i));
-            res();
-          }, typingSpeed));
+          await new Promise<void>((res) =>
+            schedule(() => {
+              setTypingText("$ " + cmd.slice(0, i));
+              res();
+            }, typingSpeed)
+          );
         }
+
         setIsTyping(false);
         setTerminalLines((prev) => [...prev, "$ " + cmd]);
         setTypingText("");
 
         for (const line of output) {
           if (isCancelled) return;
-          await new Promise<void>((res) => schedule(() => {
-            setTerminalLines((prev) => [...prev, line]);
-            res();
-          }, 100));
+          await new Promise<void>((res) =>
+            schedule(() => {
+              setTerminalLines((prev) => [...prev, line]);
+              res();
+            }, 100)
+          );
         }
 
         await new Promise<void>((res) => schedule(res, pauseAfterMs));
@@ -202,6 +166,9 @@ export default function Hero(): React.ReactElement {
     return () => window.removeEventListener("resize", resizeCanvas);
   }, []);
 
+  /** ------------------ MODAL STATE ------------------ **/
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   /** ------------------ RENDER ------------------ **/
   return (
     <section
@@ -212,50 +179,57 @@ export default function Hero(): React.ReactElement {
 
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* LEFT SIDE */}
-        {/* LEFT: Intro */}
-      <div className="text-left">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 leading-tight">
-        Hi, I'm <span className="text-green-400">Gilbert Mutai</span>
-        </h1>
+        <div className="text-left">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 leading-tight">
+            Hi, I'm <span className="text-green-400">Gilbert Mutai</span>
+          </h1>
 
-      {/* Typewriter Roles */}
-      <div className="inline-block bg-green-600/20 text-green-400 px-4 py-1 rounded-full text-sm sm:text-base font-medium mb-6">
-        {displayText}
-        <span className="ml-1 animate-pulse">|</span>
-      </div>
+          {/* Typewriter Roles */}
+          <div className="inline-block bg-green-600/20 text-green-400 px-4 py-1 rounded-full text-sm sm:text-base font-medium mb-6">
+            {displayText}
+            <span className="ml-1 animate-pulse">|</span>
+          </div>
 
-      <p className="text-gray-300 max-w-xl mb-6 text-justify">
-        As a dedicated Cloud and DevOps Engineer, I design, deploy, and manage cloud-native
-        solutions leveraging containerization and orchestration tools like Docker and Kubernetes.
-        Passionate about automation, CI/CD, and delivering resilient systems.
-      </p>
+          <p className="text-gray-300 max-w-xl mb-6 text-justify">
+            As a dedicated Cloud and DevOps Engineer, I design, deploy, and manage cloud-native
+            solutions leveraging containerization and orchestration tools like Docker and Kubernetes.
+            Passionate about automation, CI/CD, and delivering resilient systems.
+          </p>
 
+          <div className="flex flex-wrap gap-3 items-center">
+            {/* Book a Call Button */}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="flex items-center gap-2 border border-green-400 px-4 py-2 rounded-lg text-green-400 font-medium hover:bg-green-600/20 transition"
+            >
+              <CalendarDays size={18} /> Book a Call
+            </button>
 
-        <div className="flex flex-wrap gap-3 items-center">
-          <a
-            href="#contact"
-            className="flex items-center gap-2 border border-green-400 px-4 py-2 rounded-lg text-green-400 font-medium hover:bg-green-600/20 transition"
-          >
-            <CalendarDays size={18} /> Book a Call
-          </a>
-
-          <a
-            href="mailto:info@gilbertmutai.com"
-            className="flex items-center gap-2 bg-green-400 text-gray-950 px-4 py-2 rounded-lg font-medium hover:bg-green-500 transition"
-          >
-            <Mail size={18} /> Email Me
-          </a>
-
-          <div className="flex items-center gap-3 ml-2">
-            <a href="https://github.com/gilbert-mutai" target="_blank" className="text-gray-400 hover:text-green-400 transition">
-              <Github size={20} />
+            <a
+              href="mailto:info@gilbertmutai.com"
+              className="flex items-center gap-2 bg-green-400 text-gray-950 px-4 py-2 rounded-lg font-medium hover:bg-green-500 transition"
+            >
+              <Mail size={18} /> Email Me
             </a>
-            <a href="https://linkedin.com/in/gilbertmutai" target="_blank" className="text-gray-400 hover:text-green-400 transition">
-              <Linkedin size={20} />
-            </a>
+
+            <div className="flex items-center gap-3 ml-2">
+              <a
+                href="https://github.com/gilbert-mutai"
+                target="_blank"
+                className="text-gray-400 hover:text-green-400 transition"
+              >
+                <Github size={20} />
+              </a>
+              <a
+                href="https://linkedin.com/in/gilbertmutai"
+                target="_blank"
+                className="text-gray-400 hover:text-green-400 transition"
+              >
+                <Linkedin size={20} />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
         {/* RIGHT SIDE: TERMINAL */}
         <div className="w-full">
@@ -266,10 +240,16 @@ export default function Hero(): React.ReactElement {
               <span className="w-3 h-3 rounded-full bg-green-400" />
             </div>
 
-            <div ref={terminalRef} className="h-56 sm:h-64 overflow-y-auto pr-2 text-[13px] sm:text-sm">
+            <div
+              ref={terminalRef}
+              className="h-56 sm:h-64 overflow-y-auto pr-2 text-[13px] sm:text-sm"
+            >
               <div className="text-green-300 mb-2">Last login: simulated terminal</div>
               {terminalLines.map((line, idx) => (
-                <div key={idx} className="whitespace-pre-wrap text-[13px] sm:text-[14px] leading-snug">
+                <div
+                  key={idx}
+                  className="whitespace-pre-wrap text-[13px] sm:text-[14px] leading-snug"
+                >
                   {line}
                 </div>
               ))}
@@ -288,6 +268,33 @@ export default function Hero(): React.ReactElement {
           </div>
         </div>
       </div>
+
+      {/* ------------------ MODAL WITH CALENDLY ------------------ */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 max-w-2xl relative">
+            <button
+              className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <X size={20} />
+            </button>
+            <h2 className="text-2xl font-bold text-green-400 mb-4 text-center">
+              Book a Call with Gilbert
+            </h2>
+
+            <div className="rounded-lg overflow-hidden bg-gray-800">
+              <InlineWidget
+                url="https://calendly.com/gilbertmutai"
+                styles={{
+                  height: "600px",
+                  width: "100%",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

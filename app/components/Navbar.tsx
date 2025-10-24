@@ -39,7 +39,6 @@ export default function Navbar() {
     { href: "#contact", label: "Contact" },
   ];
 
-  // Close menu when link clicked
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +52,9 @@ export default function Navbar() {
           GM
         </div>
         <div className="flex flex-col leading-tight">
-          <span className="text-xl font-bold text-green-400">Gilbert Mutai</span>
+          <span className="text-xl font-bold text-green-400">
+            Gilbert Mutai
+          </span>
           <span className="text-sm text-gray-300">DevOps Engineer</span>
         </div>
       </div>
@@ -83,15 +84,6 @@ export default function Navbar() {
           className="px-3 py-2 border border-green-400 text-green-400 rounded-lg hover:bg-green-600/20 hover:scale-105 transition duration-300"
         >
           Blog
-        </a>
-
-        <a
-          href="https://docs.google.com/document/d/1WrsGoZBDFpeCh7jpk5gkubqRJaU0nW59LGAzeoACi0c/export?format=pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 bg-green-400 text-gray-950 rounded-lg font-medium hover:bg-green-500 hover:scale-105 transition duration-300"
-        >
-          Download CV
         </a>
 
         <div className="flex items-center gap-2">
@@ -161,15 +153,6 @@ export default function Navbar() {
                   <Linkedin size={24} />
                 </a>
               </div>
-
-              <a
-                href="https://docs.google.com/document/d/1WrsGoZBDFpeCh7jpk5gkubqRJaU0nW59LGAzeoACi0c/export?format=pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 px-4 py-2 bg-green-400 text-gray-950 rounded-lg font-medium hover:bg-green-500 transition"
-              >
-                Download CV
-              </a>
             </div>
           </motion.div>
         )}
