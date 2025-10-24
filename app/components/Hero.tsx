@@ -49,13 +49,64 @@ export default function Hero(): React.ReactElement {
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const terminalRef = useRef<HTMLDivElement | null>(null);
 
-  const commands = [
-    { cmd: "kubectl get pods --all-namespaces", output: ["..."], pauseAfterMs: 1400 },
-    { cmd: "kubectl describe deployment web-frontend", output: ["..."], pauseAfterMs: 1200 },
-    { cmd: "terraform apply -auto-approve", output: ["..."], pauseAfterMs: 1500 },
-    { cmd: "ansible-playbook site.yml --limit webservers", output: ["..."], pauseAfterMs: 1500 },
-    { cmd: "aws eks update-kubeconfig --name prod-cluster", output: ["..."], pauseAfterMs: 1200 },
+    const commands = [
+    {
+      cmd: "kubectl get pods --all-namespaces",
+      output: [
+        "NAMESPACE     NAME                                      READY   STATUS    RESTARTS   AGE",
+        "default       web-frontend-8c79f9b56-xyz               1/1     Running   0          3d",
+        "default       api-server-5d8f6f49bb-abc                1/1     Running   2          3d",
+        "kube-system   coredns-7db6d8ff4b-vnczs                 1/1     Running   0          5d",
+      ],
+      pauseAfterMs: 1400,
+    },
+    {
+      cmd: "kubectl describe deployment web-frontend",
+      output: [
+        "Name:                   web-frontend",
+        "Namespace:              default",
+        "Replicas:               3 desired | 3 updated | 3 available",
+        "StrategyType:           RollingUpdate",
+        "Container:              web-frontend",
+        "Image:                  nginx:latest",
+        "Ports:                  80/TCP",
+      ],
+      pauseAfterMs: 1200,
+    },
+    {
+      cmd: "terraform apply -auto-approve",
+      output: [
+        "aws_instance.web: Creating...",
+        "aws_instance.web: Creation complete after 18s [id=i-07a1234b56cdef789]",
+        "",
+        "Apply complete! Resources: 1 added, 0 changed, 0 destroyed.",
+      ],
+      pauseAfterMs: 1500,
+    },
+    {
+      cmd: "ansible-playbook site.yml --limit webservers",
+      output: [
+        "PLAY [webservers] *****************************************************",
+        "TASK [Gathering Facts] ************************************************",
+        "ok: [web-1]",
+        "TASK [Install NGINX] **************************************************",
+        "changed: [web-1]",
+        "",
+        "PLAY RECAP ************************************************************",
+        "web-1 : ok=2 changed=1 unreachable=0 failed=0",
+      ],
+      pauseAfterMs: 1500,
+    },
+    {
+      cmd: "aws eks update-kubeconfig --name prod-cluster",
+      output: [
+        "Added new context arn:aws:eks:us-east-1:123456789012:cluster/prod-cluster to /home/gilbert/.kube/config",
+        "Switched to context 'prod-cluster'",
+      ],
+      pauseAfterMs: 1200,
+    },
   ];
+
 
   const typingSpeed = 28;
   const betweenCommandsDelay = 700;
@@ -272,7 +323,7 @@ export default function Hero(): React.ReactElement {
       {/* ------------------ MODAL WITH CALENDLY ------------------ */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-gray-900 rounded-lg p-6 w-11/12 max-w-2xl relative">
+          <div className="bg-gray-900 rounded-lg p-6 w-11/12 max-w-xl relative transition-all duration-300">
             <button
               className="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition"
               onClick={() => setIsModalOpen(false)}
@@ -283,15 +334,17 @@ export default function Hero(): React.ReactElement {
               Book a Call with Gilbert
             </h2>
 
-            <div className="rounded-lg overflow-hidden bg-gray-800">
-              <InlineWidget
-                url="https://calendly.com/gilbertmutai"
-                styles={{
-                  height: "600px",
-                  width: "100%",
-                }}
-              />
-            </div>
+          <div className="rounded-lg overflow-hidden bg-gray-800 transition-all duration-500 ease-in-out">
+          <InlineWidget
+            url="https://calendly.com/gilbertmutai?hide_gdpr_banner=1&background_color=0a0a0a&text_color=f5f5f5&primary_color=22c55e"
+            styles={{
+              height: "420px",
+              width: "100%",
+              borderRadius: "0.5rem",
+            }}
+          />
+        </div>
+
           </div>
         </div>
       )}

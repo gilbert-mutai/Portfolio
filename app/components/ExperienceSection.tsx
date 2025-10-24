@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FaDocker, FaGitAlt, FaPython, FaDatabase, FaWindows,FaNetworkWired, FaFileExcel } from "react-icons/fa";
-import { SiKubernetes, SiTerraform, SiAnsible, SiAkiflow, SiSap, SiElasticsearch, SiGrafana, SiPrometheus, SiArgo } from "react-icons/si";
+import { SiKubernetes, SiTerraform, SiAnsible, SiAkiflow, SiSap, SiElasticsearch, SiGrafana, SiPrometheus, SiArgo, SiRedhat } from "react-icons/si";
 
 type ExperienceProps = {
   id?: string;
@@ -10,26 +10,28 @@ type ExperienceProps = {
 
 export default function Experience({ id }: ExperienceProps) {
   const experiences = [
-    {
+  {
       role: "DevOps Engineer | Cloud Support Engineer",
       company: "Angani Limited",
       logo: "/logos/angani.png",
       location: "Nairobi, Kenya",
       duration: "June 2024 – Present",
       description:
-        "Designing scalable cloud solutions with Docker, Kubernetes, OpenShift, Terraform, and Ansible. Optimizing CI/CD pipelines with GitOps (ArgoCD), and monitoring system performance with Prometheus, Grafana, and ELK stack for high availability and reliability.",
+        "Designing scalable cloud solutions with Docker, Kubernetes, OpenShift, Terraform, and Ansible. Building and optimizing CI/CD pipelines using Jenkins, GitLab CI, and GitHub Actions, with GitOps practices through ArgoCD. Monitoring and observability implemented via Prometheus, Grafana, and the ELK stack to ensure high availability and system reliability.",
       tools: [
-        { name: "Docker", icon: FaDocker, color: "text-blue-500" },
         { name: "Kubernetes", icon: SiKubernetes, color: "text-blue-400" },
+        { name: "OpenShift", icon: SiRedhat, color: "text-red-500" },
         { name: "Terraform", icon: SiTerraform, color: "text-purple-400" },
         { name: "Ansible", icon: SiAnsible, color: "text-red-400" },
-        { name: "Git", icon: FaGitAlt, color: "text-orange-400" },
+        { name: "GitLab CI", icon: FaGitAlt, color: "text-orange-400" },
+        { name: "Jenkins", icon: SiArgo, color: "text-green-400" },
         { name: "ArgoCD", icon: SiArgo, color: "text-pink-400" },
         { name: "Prometheus", icon: SiPrometheus, color: "text-orange-300" },
         { name: "Grafana", icon: SiGrafana, color: "text-red-400" },
         { name: "ELK Stack", icon: SiElasticsearch, color: "text-blue-300" },
       ],
     },
+
     {
       role: "Data Engineer",
       company: "NCBA Group",

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { FaAws, FaDocker } from "react-icons/fa";
-import { SiHashicorp, SiRedhat, SiKubernetes } from "react-icons/si";
-import { TbRocket } from "react-icons/tb";
+import { FaAws } from "react-icons/fa";
+import { SiKubernetes, SiLinuxfoundation, SiCisco } from "react-icons/si";
+import { FiExternalLink } from "react-icons/fi";
 
 interface CertificationsSectionProps {
   id?: string;
@@ -11,47 +11,75 @@ interface CertificationsSectionProps {
 
 const certifications = [
   {
-    name: "AWS Certified Solutions Architect – Associate",
-    issuer: "Amazon Web Services",
-    date: "Planned – May 2025",
+    name: "AWS Certified Cloud Practitioner",
+    issuer: "Amazon Web Services Training and Certification",
+    date: "Issued Apr 17, 2024 · Expires Apr 17, 2027",
     icon: <FaAws className="w-10 h-10 text-yellow-400" />,
+    verifyUrl: "https://www.credly.com/badges/8f8bae42-7e4c-459c-99c6-88e9fd84e577/public_url",
   },
   {
-    name: "Terraform Associate",
-    issuer: "HashiCorp",
-    date: "Planned – July 2025",
-    icon: <SiHashicorp className="w-10 h-10 text-purple-400" />,
-  },
-  {
-    name: "Red Hat Certified Engineer (RHCE)",
-    issuer: "Red Hat",
-    date: "Planned – Sept 2025",
-    icon: <SiRedhat className="w-10 h-10 text-red-600" />,
-  },
-  {
-    name: "Certified Kubernetes Administrator (CKA)",
-    issuer: "Linux Foundation",
-    date: "Planned – Nov 2025",
+    name: "KCNA: Kubernetes and Cloud Native Associate",
+    issuer: "The Linux Foundation",
+    date: "Issued Jun 4, 2025 · Expires Jun 5, 2027",
     icon: <SiKubernetes className="w-10 h-10 text-blue-400" />,
+    verifyUrl: "https://www.credly.com/badges/ed713936-2db2-4d69-83a5-b3849f0e30d4/public_url",
   },
   {
-    name: "AWS Certified DevOps Engineer – Professional",
-    issuer: "Amazon Web Services",
-    date: "Planned – Dec 2025",
-    icon: <TbRocket className="w-10 h-10 text-green-400" />,
+    name: "AWS re/Start Graduate",
+    issuer: "Amazon Web Services Training and Certification",
+    date: "Issued Apr 21, 2024",
+    icon: <FaAws className="w-10 h-10 text-green-400" />,
+    verifyUrl: "https://www.credly.com/badges/5e21539f-7366-4976-be43-e694ca508606/public_url",
   },
   {
-    name: "Docker Certified Associate",
-    issuer: "Docker",
-    date: "Planned – Feb 2026",
-    icon: <FaDocker className="w-10 h-10 text-blue-500" />,
+    name: "LFS250: Kubernetes and Cloud Native Essentials",
+    issuer: "The Linux Foundation",
+    date: "Issued May 3, 2025",
+    icon: <SiLinuxfoundation className="w-10 h-10 text-gray-300" />,
+    verifyUrl: "https://www.credly.com/badges/4e7280d6-62ae-49ed-95a3-34b5a820703a/public_url",
+  },
+  {
+    name: "Introduction to Packet Tracer",
+    issuer: "Cisco Networking Academy",
+    date: "Issued Jan 31, 2022",
+    icon: <SiCisco className="w-10 h-10 text-blue-500" />,
+    verifyUrl: "https://www.credly.com/badges/c74f9e94-1844-423a-8d13-825a23babd90/public_url",
+  },
+  {
+    name: "CCNA: Introduction to Networks",
+    issuer: "Cisco Networking Academy",
+    date: "Issued Feb 21, 2022",
+    icon: <SiCisco className="w-10 h-10 text-blue-400" />,
+    verifyUrl: "https://www.credly.com/badges/f7fa7336-b1ba-472b-a4f6-8edf693cfb17/public_url",
+  },
+  {
+    name: "CCNA: Switching, Routing, and Wireless Essentials",
+    issuer: "Cisco Networking Academy",
+    date: "Issued May 3, 2022",
+    icon: <SiCisco className="w-10 h-10 text-blue-300" />,
+    verifyUrl: "https://www.credly.com/badges/680b55cf-d0eb-4634-b48c-f3e543fa74cf/public_url",
+  },
+  {
+    name: "CCNA: Enterprise Networking, Security, and Automation",
+    issuer: "Cisco Networking Academy",
+    date: "Issued Jun 20, 2022",
+    icon: <SiCisco className="w-10 h-10 text-green-400" />,
+    verifyUrl: "https://www.credly.com/badges/39cdb704-fcb3-41a8-adbe-77919aee850c/public_url",
+  },
+  {
+    name: "Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy",
+    date: "Issued Jun 22, 2022",
+    icon: <SiCisco className="w-10 h-10 text-green-300" />,
+    verifyUrl: "https://www.credly.com/badges/5388813f-50d0-4f54-a1df-97a75a2ab83e/public_url",
   },
 ];
 
 const skills = [
   "AWS", "Terraform", "Ansible", "Kubernetes",
-  "Docker", "Linux", "CI/CD", "GitHub Actions",
-  "Jenkins", "Bash Scripting", "Monitoring & Logging",
+  "Docker", "OpenShift", "Linux", "CI/CD",
+  "GitHub Actions", "GitLab CI", "Jenkins",
+  "Bash Scripting", "Monitoring & Logging",
   "Python", "Cloud Automation",
 ];
 
@@ -62,7 +90,7 @@ export default function CertificationsSection({ id }: CertificationsSectionProps
         Certifications
       </h2>
 
-      {/* Certifications */}
+      {/* Certifications Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
         {certifications.map((cert, index) => (
           <div
@@ -73,15 +101,27 @@ export default function CertificationsSection({ id }: CertificationsSectionProps
           >
             <div className="mb-3">{cert.icon}</div>
             <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
-            <p className="text-gray-400">{cert.issuer}</p>
+            <p className="text-gray-400 text-sm">{cert.issuer}</p>
             <p className="text-sm text-gray-500 mt-2 italic">{cert.date}</p>
+
+            {cert.verifyUrl && (
+              <a
+                href={cert.verifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center text-green-400 text-sm font-medium
+                           hover:text-green-300 transition-colors duration-200"
+              >
+                Verify <FiExternalLink className="ml-1 w-4 h-4" />
+              </a>
+            )}
           </div>
         ))}
       </div>
 
-      {/* Core Skills */}
+      {/* Core Skills & Tools */}
       <div className="max-w-4xl mx-auto text-center">
-        <h3 className="text-2xl font-bold mb-6 text-white">Core Skills</h3>
+        <h3 className="text-2xl font-bold mb-6 text-white">Core Skills & Tools</h3>
         <div className="flex flex-wrap justify-center gap-3">
           {skills.map((skill, index) => (
             <span
