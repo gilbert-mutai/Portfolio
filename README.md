@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 Gilbert Mutai – Cloud & DevOps Engineer Portfolio
 
-## Getting Started
+This is my personal portfolio website built using **Next.js (React)**, **Tailwind CSS**, and **shadcn/ui**, showcasing my certifications, cloud projects, and DevOps skillset.  
 
-First, run the development server:
+It highlights my journey in **Cloud Engineering**, **Automation**, and **DevOps**, and serves as a central hub for my professional work and achievements.
+
+---
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js (React 18)
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Icons:** Lucide React, React Icons
+- **Animations:** Framer Motion
+- **Deployment:** Vercel / AWS Amplify / Netlify
+
+---
+
+## 🧩 Features
+
+- ⚡ Interactive Hero, About, and Projects sections  
+- 🧠 Real certifications with verification links  
+- 🧰 “Core Skills & Tools” badge grid  
+- 📅 “Book a Call” modal powered by Calendly  
+- 📱 Fully responsive and mobile-friendly  
+- 🌗 Sleek dark theme with hover and motion effects  
+
+---
+
+## 🖼️ Screenshot
+
+Below is a preview of the portfolio homepage:
+
+![Portfolio Screenshot](./public/portfolio.png)
+
+---
+
+## 🛠️ Installation & Setup
 
 ```bash
+# Clone this repository
+git clone https://github.com/gilbert-mutai/Portfolio
+
+# Navigate to the project directory
+cd 
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit **http://localhost:3000** to view the site locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗️ Folder Structure
 
-## Learn More
+```
+app/
+ ├── components/        # Reusable UI components (Hero, About, Navbar, etc.)
+ ├── layout.tsx         # Global layout and theme setup
+ ├── page.tsx           # Home page
+ └── styles/            # Tailwind configurations
 
-To learn more about Next.js, take a look at the following resources:
+public/
+ ├── assets/            # Static images and icons
+ └── favicon.ico
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧾 Certifications
 
-## Deploy on Vercel
+Here are some of the certifications showcased on my site:
+- **AWS Certified Cloud Practitioner**
+- **KCNA: Kubernetes and Cloud Native Associate**
+- **AWS re/Start Graduate**
+- **LFS250: Kubernetes and Cloud Native Essentials**
+- **CCNA Series (Introduction to Networks, Switching, Enterprise)**
+- **Introduction to Cybersecurity**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Each certification links directly to its **Credly verification page**.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🌍 Deployment
+
+You can deploy this project easily using:
+
+### **Vercel (Recommended)**
+```bash
+npm run build
+vercel deploy
+```
+
+Or host it on **AWS Amplify**, **Netlify**, or any platform that supports Next.js.
+
+---
+
+## 📫 Contact
+
+**Gilbert Mutai**  
+Cloud & DevOps Engineer  
+📍 Nairobi, Kenya  
+🌐 [LinkedIn](https://www.linkedin.com/in/gilbertmutai/) • [GitHub](https://github.com/gilbert-mutai/Portfolio)  
+
+---
+
+⭐ If you like this project, consider giving it a **star** on GitHub — it helps others discover it!
