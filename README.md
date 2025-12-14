@@ -1,8 +1,6 @@
 # Gilbert Mutai – Portfolio
 
-This is my personal portfolio website built using **Next.js (React)**, **Tailwind CSS**, and **shadcn/ui**, showcasing my certifications, cloud projects, and DevOps skillset.  
-
-It highlights my journey in **Cloud Engineering**, **Automation**, and **DevOps**, and serves as a central hub for my professional work and achievements.
+A modern, responsive portfolio website built with **Next.js**, **Tailwind CSS**, and **Framer Motion**, showcasing my journey in **Cloud Engineering**, **DevOps**, and **Automation**.
 
 ---
 
@@ -10,42 +8,47 @@ It highlights my journey in **Cloud Engineering**, **Automation**, and **DevOps*
 
 ![Portfolio Screenshot](./public/portfolio.png)
 
+**Live Demo:** [gilbertmutai.com](https://gilbertmutai.com)
+
 ---
 
 ## Tech Stack
 
-- **Framework:** Next.js (React 18)
-- **Styling:** Tailwind CSS + shadcn/ui
+- **Framework:** Next.js 15 (React 18)
+- **Styling:** Tailwind CSS
 - **Icons:** Lucide React, React Icons
 - **Animations:** Framer Motion
+- **Scheduling:** Calendly Integration
 - **Deployment:** Vercel
 
 ---
 
 ## Features
 
--  Interactive Hero, About, and Projects sections  
--  Real certifications with verification links  
--  “Core Skills & Tools” badge grid  
--  “Book a Call” modal powered by Calendly  
--  Fully responsive and mobile-friendly  
--  Sleek dark theme with hover and motion effects  
+- Interactive Hero with animated terminal simulation
+- Comprehensive About, Experience, and Education sections
+- Real certifications with Credly verification links
+- Dynamic "Core Skills & Tools" showcase
+- "Book a Call" modal powered by Calendly
+- Fully responsive and mobile-optimized
+- Sleek dark theme with smooth hover effects
+- Accessibility-focused design
 
 ---
 
 ## Installation & Setup
 
 ```bash
-# Clone this repository
-git clone https://github.com/gilbert-mutai/Portfolio
+# Clone the repository
+git clone https://github.com/gilbert-mutai/Portfolio.git
 
-# Navigate to the project directory
+# Navigate to project directory
 cd Portfolio
 
 # Install dependencies
 npm install
 
-# Start the development server
+# Start development server
 npm run dev
 ```
 
@@ -53,33 +56,53 @@ Visit **http://localhost:3000** to view the site locally.
 
 ---
 
-## Folder Structure
+## Project Structure
 
 ```
 app/
- ├── components/        # Reusable UI components (Hero, About, Navbar, etc.)
- ├── layout.tsx         # Global layout and theme setup
- ├── page.tsx           # Home page
- └── styles/            # Tailwind configurations
+ ├── components/        # Reusable UI components
+ │   ├── Hero.tsx
+ │   ├── Navbar.tsx
+ │   ├── AboutSection.tsx
+ │   ├── ExperienceSection.tsx
+ │   ├── EducationSection.tsx
+ │   ├── Certifications.tsx
+ │   ├── ProjectsSection.tsx
+ │   ├── ContactSection.tsx
+ │   └── ...
+ ├── layout.tsx         # Root layout with fonts & scripts
+ ├── page.tsx           # Main home page
+ └── globals.css        # Global styles & Tailwind config
 
 public/
- ├── assets/            # Static images and icons
- └── favicon.ico
+ ├── logos/             # Company and certification logos
+ └── portfolio.png      # Screenshot
 ```
 
 ---
 
 ## Certifications
 
-Here are some of the certifications showcased on my site:
-- **AWS Certified Cloud Practitioner**
-- **KCNA: Kubernetes and Cloud Native Associate**
-- **AWS re/Start Graduate**
-- **LFS250: Kubernetes and Cloud Native Essentials**
-- **CCNA Series (Introduction to Networks, Switching, Enterprise)**
-- **Introduction to Cybersecurity**
+- **AWS Certified Cloud Practitioner** (2024-2027)
+- **KCNA: Kubernetes and Cloud Native Associate** (2025-2027)
+- **AWS re/Start Graduate** (2024)
+- **LFS250: Kubernetes and Cloud Native Essentials** (2025)
+- **CCNA Series** (Introduction to Networks, Switching, Enterprise)
+- **Introduction to Cybersecurity** (2022)
 
-Each certification links directly to its **Credly verification page**.
+Each certification includes a **direct verification link** to Credly.
+
+---
+
+## Key Sections
+
+- **Hero:** Animated terminal with real DevOps commands
+- **About:** Professional summary and focus areas
+- **Experience:** Work history with tech stacks
+- **Education:** Academic background
+- **Certifications:** Verified credentials
+- **Projects:** Hands-on cloud and DevOps projects
+- **Contact:** Multiple ways to get in touch
 
 ---
 
@@ -88,8 +111,17 @@ Each certification links directly to its **Credly verification page**.
 **Gilbert Mutai**  
 Cloud & DevOps Engineer  
 Nairobi, Kenya  
-[LinkedIn](https://www.linkedin.com/in/gilbertmutai/) • [GitHub](https://github.com/gilbert-mutai/Portfolio)  
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gilbertmutai/)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gilbert-mutai)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:info@gilbertmutai.com)
 
 ---
 
-⭐ If you like this project, consider giving it a **star** on GitHub — it helps others discover it!
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+**If you find this project helpful, consider giving it a star on GitHub!**

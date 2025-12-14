@@ -1,6 +1,34 @@
 "use client";
 
-const projects = [
+import React from "react";
+
+// Types
+interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  link: string;
+}
+
+interface ProjectsSectionProps {
+  id?: string;
+}
+
+// Constants
+const STYLES = {
+  section: "bg-gray-950 text-white py-16 px-6",
+  heading: "text-4xl font-bold text-center mb-12 text-green-400",
+  grid: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto",
+  card: "bg-gray-900 p-6 rounded-2xl shadow-md border border-gray-800 hover:shadow-lg hover:border-green-500 hover:scale-105 transition-all duration-300 flex flex-col justify-between",
+  cardContent: "mb-4",
+  title: "text-2xl font-semibold mb-3",
+  description: "text-gray-300 mb-4",
+  techContainer: "flex flex-wrap gap-2 mb-4",
+  techBadge: "bg-green-600/20 text-green-400 text-sm px-3 py-1 rounded-full",
+  link: "text-green-400 hover:text-green-500 underline font-medium mt-2",
+} as const;
+
+const PROJECTS: Project[] = [
   {
     title: "Multi-tier AWS Web App Deployment",
     description:
@@ -45,49 +73,49 @@ const projects = [
   },
 ];
 
-interface ProjectsSectionProps {
-  id?: string;
-}
+// Reusable Components
+const TechBadge = ({ tech }: { tech: string }) => (
+  <span className={STYLES.techBadge}>{tech}</span>
+);
+
+const TechStack = ({ technologies }: { technologies: string[] }) => (
+  <div className={STYLES.techContainer}>
+    {technologies.map((tech, i) => (
+      <TechBadge key={i} tech={tech} />
+    ))}
+  </div>
+);
+
+const ProjectLink = ({ url, title }: { url: string; title: string }) => (
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={STYLES.link}
+    aria-label={`View ${title} on GitHub`}
+  >
+    View on GitHub →
+  </a>
+);
+
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div className={STYLES.card}>
+    <div>
+      <h3 className={STYLES.title}>{project.title}</h3>
+      <p className={STYLES.description}>{project.description}</p>
+      <TechStack technologies={project.tech} />
+    </div>
+    <ProjectLink url={project.link} title={project.title} />
+  </div>
+);
 
 export default function ProjectsSection({ id }: ProjectsSectionProps) {
   return (
-    <section id={id} className="bg-gray-950 text-white py-16 px-6">
-      <h2 className="text-4xl font-bold text-center mb-12 text-green-400">
-        Projects
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {projects.map((project, index) => (
-          <div
-            key={index}
-            className="bg-gray-900 p-6 rounded-2xl shadow-md border border-gray-800
-                       hover:shadow-lg hover:border-green-500 hover:scale-105
-                       transition-all duration-300 flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="text-2xl font-semibold mb-3">{project.title}</h3>
-              <p className="text-gray-300 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="bg-green-600/20 text-green-400 text-sm px-3 py-1 rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-green-400 hover:text-green-500 underline font-medium mt-2"
-            >
-              View on GitHub →
-            </a>
-          </div>
+    <section id={id} className={STYLES.section}>
+      <h2 className={STYLES.heading}>Projects</h2>
+      <div className={STYLES.grid}>
+        {PROJECTS.map((project, index) => (
+          <ProjectCard key={index} project={project} />
         ))}
       </div>
     </section>
